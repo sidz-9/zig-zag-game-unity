@@ -38,6 +38,8 @@ public class BallController : MonoBehaviour
         if(!Physics.Raycast(transform.position, Vector3.down, 1f)) {    // if the raycast is not colliding with any object, then make the ball fall down
             rb.velocity = new Vector3(0, -speed * 2, 0);
             gameOver = true;
+
+            Camera.main.GetComponent<CameraFollow>().gameOver = true;  // make the gameOver field of CameraFollow script, so that camera will stop following the ball.
         }
 
         if(Input.GetMouseButtonDown(0) && !gameOver) {

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlatformSpawner : MonoBehaviour
 {
     public GameObject platform;
+    public GameObject diamond;
 
     Vector3 lastPos;
     float size;
@@ -50,13 +51,23 @@ public class PlatformSpawner : MonoBehaviour
         Vector3 pos = lastPos;
         pos.x += size;
         lastPos = pos;
-        Instantiate(platform, pos, Quaternion.identity);
+        Instantiate(platform, pos, Quaternion.identity);    // spawning the platform along x axis
+
+        int r = Random.Range(0, 4);
+        if(r == 0) {
+            Instantiate(diamond, new Vector3(pos.x, pos.y+1, pos.z), diamond.transform.rotation);   // spawning the diamond
+        }
     }
 
     void SpawnZ() {
         Vector3 pos = lastPos;
         pos.z += size;
         lastPos = pos;
-        Instantiate(platform, pos, Quaternion.identity);
+        Instantiate(platform, pos, Quaternion.identity);    // spawning the platform along z axis
+        
+        int r = Random.Range(0, 4);
+        if(r == 0) {
+            Instantiate(diamond, new Vector3(pos.x, pos.y+1, pos.z), diamond.transform.rotation);   // spawning the diamond
+        }
     }
 }

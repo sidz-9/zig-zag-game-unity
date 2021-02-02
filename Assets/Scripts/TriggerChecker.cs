@@ -19,13 +19,16 @@ public class TriggerChecker : MonoBehaviour
     void OnTriggerExit(Collider col) {      // gets called when an object exits this object(in this case, its a box collider)
         if(col.gameObject.tag == "Ball") {
             Invoke("FallDown", 0.5f);       // the method "FallDown" is invoked after 0.5s
+            // FallDown();
         }
     }
+
 
     void FallDown() {
         GetComponentInParent<Rigidbody>().useGravity = true;    // Get the parent of the current component(in this case Rigidbody is the parent of boxcollider) and set its useGravity value to true
         GetComponentInParent<Rigidbody>().isKinematic = false;
         Destroy(transform.parent.gameObject, 2f);               // destroy the parent component after 2s
+        Debug.Log("Hakai!!!");
         // Destroy(transform.parent.gameObject);
         // DestroyImmediate(transform.parent.gameObject);
     }

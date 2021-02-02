@@ -6,6 +6,8 @@ public class BallController : MonoBehaviour
 {
     Rigidbody rb;
 
+    public GameObject particle;
+
     [SerializeField]    // you can use this instead of public to make the field visible in the editor
     private float speed;
     bool started;
@@ -53,6 +55,15 @@ public class BallController : MonoBehaviour
         }
         else if (rb.velocity.x > 0) {
             rb.velocity = new Vector3(0, 0, speed);
+        }
+    }
+
+    // destroy diamond on ball enter
+    void OnTriggerEnter(Collider col) {
+        if(col.gameObject.tag == "Diamond") {
+            GameObject particleObject = Instantiate(particle, col.gameObject.transform.position, Quaternion.identity) as GameObject;
+            Destroy(col.gameObject);
+            Destroy(particleObject, 1f);
         }
     }
 }

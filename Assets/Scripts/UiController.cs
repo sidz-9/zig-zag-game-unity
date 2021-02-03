@@ -1,9 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UiController : MonoBehaviour
 {
+    public static UiController instance;
+    public GameObject zigzagPanel;
+    public GameObject gameoverPanel;
+    public GameObject tapText;
+    public Text score;
+    public Text highScore1;
+    public Text highScore2;
+
+    void Awake() {
+        if(instance == null) {
+            instance = this;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +30,18 @@ public class UiController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void GameStart() {
+        tapText.SetActive(false);   // disables the tapText blink on game start
+        zigzagPanel.GetComponent<Animator>().Play("MoveUp");    // plays the animation of MoveUp of zigzagPanel
+    }
+
+    public void GameOver() {
+        gameoverPanel.SetActive(true);  // directly plays the slide in animation of gameover panel
+    }
+
+    public void Reset() {
+        SceneManager.LoadScene(0);  // Loads the 0th scene, in this case Level1
     }
 }

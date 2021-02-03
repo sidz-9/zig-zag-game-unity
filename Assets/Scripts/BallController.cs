@@ -32,6 +32,8 @@ public class BallController : MonoBehaviour
             if(Input.GetMouseButtonDown(0)) {
                 rb.velocity = new Vector3(speed, 0, 0);
                 started = true;
+
+                GameController.instance.StartGame();
             }
         }
 
@@ -42,6 +44,8 @@ public class BallController : MonoBehaviour
             gameOver = true;
 
             Camera.main.GetComponent<CameraFollow>().gameOver = true;  // make the gameOver field of CameraFollow script, so that camera will stop following the ball.
+        
+            GameController.instance.StopGame();
         }
 
         if(Input.GetMouseButtonDown(0) && !gameOver) {

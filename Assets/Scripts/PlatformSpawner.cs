@@ -25,13 +25,17 @@ public class PlatformSpawner : MonoBehaviour
             SpawnPlatforms();
         }
 
-        InvokeRepeating("SpawnPlatforms", 5f, 0.2f);    // After 2s, calls the method "SpawnPlatforms" at an interval of every 0.2s
+    }
+
+    public void StartSpawningPlatforms() {
+        // InvokeRepeating("SpawnPlatforms", 2f, 0.2f);    // After 2s, calls the method "SpawnPlatforms" at an interval of every 0.2s
+        InvokeRepeating("SpawnPlatforms", 0.1f, 0.2f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(gameOver) {
+        if(GameController.instance.gameOver == true) {
             CancelInvoke("SpawnPlatforms");     // cancels the invoke named "SpawnPlatforms"
         }
     }

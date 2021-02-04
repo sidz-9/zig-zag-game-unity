@@ -11,8 +11,8 @@ public class UiController : MonoBehaviour
     public GameObject gameoverPanel;
     public GameObject tapText;
     public Text score;
-    public Text highScore1;
-    public Text highScore2;
+    public Text highScore1;     // highscore in zigzag panel
+    public Text highScore2;     // highscore in gameover panel
 
     void Awake() {
         if(instance == null) {
@@ -23,7 +23,7 @@ public class UiController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        highScore1.text = "High Score: " + PlayerPrefs.GetInt("highScore");
     }
 
     // Update is called once per frame
@@ -38,6 +38,8 @@ public class UiController : MonoBehaviour
     }
 
     public void GameOver() {
+        score.text = PlayerPrefs.GetInt("score").ToString();
+        highScore2.text = PlayerPrefs.GetInt("highScore").ToString();
         gameoverPanel.SetActive(true);  // directly plays the slide in animation of gameover panel
     }
 

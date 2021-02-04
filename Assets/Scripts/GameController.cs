@@ -28,10 +28,12 @@ public class GameController : MonoBehaviour
     public void StartGame() {
         UiController.instance.GameStart();
         ScoreController.instance.StartScore();
+        GameObject.Find("PlatformSpawner").GetComponent<PlatformSpawner>().StartSpawningPlatforms();   // Find PlatformSpawner from heirharchy, get the PlatformSpawner script(component) and call the StartSpawningPlatform method
     }
 
     public void StopGame() {
         UiController.instance.GameOver();
         ScoreController.instance.StopScore();
+        gameOver = true;
     }
 }

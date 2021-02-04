@@ -28,7 +28,7 @@ public class ScoreController : MonoBehaviour
     }
 
     void IncrementScore() {
-        score++;
+        score+=1;
     }
 
     public void StartScore() {      // starts calling the IncrementScore method after 0.1s for every 0.5s
@@ -37,6 +37,8 @@ public class ScoreController : MonoBehaviour
 
     public void StopScore() {
         CancelInvoke("IncrementScore");     // stops the invoke of IncrementScore
+
+        PlayerPrefs.SetInt("score", score);
 
         if(PlayerPrefs.HasKey("highScore"))     // if highScore already exists in system, then check it against the current score
         {

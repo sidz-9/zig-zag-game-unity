@@ -27,7 +27,8 @@ public class TriggerChecker : MonoBehaviour
     void FallDown() {
         GetComponentInParent<Rigidbody>().useGravity = true;    // Get the parent of the current component(in this case Rigidbody is the parent of boxcollider) and set its useGravity value to true
         GetComponentInParent<Rigidbody>().isKinematic = false;
-        Destroy(transform.parent.gameObject, 2f);               // destroy the parent component after 2s
+        // Destroy(transform.parent.gameObject, 2f);               // destroy the parent component after 2s
+        PlatformDestroyer.instance.Destroy();
         Debug.Log("Hakai!!!");
         // Destroy(transform.parent.gameObject);
         // DestroyImmediate(transform.parent.gameObject);

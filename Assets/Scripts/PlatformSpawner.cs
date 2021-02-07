@@ -21,9 +21,9 @@ public class PlatformSpawner : MonoBehaviour
         lastPos = platform.transform.position;
         size = platform.transform.localScale.x;
 
-        for(int i = 0; i < 20; i++) {
+        // for(int i = 0; i < 20; i++) {
             SpawnPlatforms();
-        }
+        // }
 
     }
 
@@ -55,7 +55,12 @@ public class PlatformSpawner : MonoBehaviour
         Vector3 pos = lastPos;
         pos.x += size;
         lastPos = pos;
-        Instantiate(platform, pos, Quaternion.identity);    // spawning the platform along x axis
+        // Instantiate(platform, pos, Quaternion.identity);    // spawning the platform along x axis
+        GameObject obj = ObjectPooler.current.GetPooledObject();
+        if(obj == null) return;
+        obj.transform.position = pos;
+        obj.transform.rotation = Quaternion.identity;
+        obj.SetActive(true);
 
         int r = Random.Range(0, 4);
         if(r == 0) {
@@ -67,11 +72,28 @@ public class PlatformSpawner : MonoBehaviour
         Vector3 pos = lastPos;
         pos.z += size;
         lastPos = pos;
-        Instantiate(platform, pos, Quaternion.identity);    // spawning the platform along z axis
+        // Instantiate(platform, pos, Quaternion.identity);    // spawning the platform along z axis
+        GameObject obj = ObjectPooler.current.GetPooledObject();
+        if(obj == null) return;
+        obj.transform.position = pos;
+        obj.transform.rotation = Quaternion.identity;
+        obj.SetActive(true);
         
         int r = Random.Range(0, 4);
         if(r == 0) {
             Instantiate(diamond, new Vector3(pos.x, pos.y+1, pos.z), diamond.transform.rotation);   // spawning the diamond
         }
     }
+
+    // void OnEnable() {
+    //     Invoke("Destroy", 2f);
+    // }
+
+    // void Destroy() {
+    //     gameObject.SetActive(false);
+    // }
+
+    // void OnDisable() {
+    //     CancelInvoke("Destroy");
+    // }
 }
